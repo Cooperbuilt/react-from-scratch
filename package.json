@@ -7,6 +7,15 @@
     "test": "jest",
     "watch": "jest --watch"
   },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+          "jsx": true
+      }
+  }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
