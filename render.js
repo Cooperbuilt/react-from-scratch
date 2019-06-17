@@ -10,11 +10,14 @@
  * @return {void} executes a side effect
  */
 
+const ELEMENT_NODE_TYPE = 1
+const TEXT_NODE_TYPE = 3
+
 export function render(element, parentDom) {
   const { type, props } = element;
 
   // Create the DOM element
-  const isTextElement = type === "TEXT ELEMENT";
+  const isTextElement = type == "TEXT ELEMENT";
   const dom = isTextElement
     ? document.createTextNode("")
     : document.createElement(type);
@@ -28,14 +31,19 @@ export function render(element, parentDom) {
       dom.addEventListener(eventType, props[name]);
     });
 
-  // Set Props only on HTML elements and skip nodes
-  if (dom instanceof HTMLElement) {
+  // Set Props only on HTML elements and skip text nodes
+  if (dom.nodeType == ELEMENT_NODE_TYPE) {
     const isAttribute = name => !isListener(name) && name != "children";
     Object.keys(props)
       .filter(isAttribute)
       .forEach(name => {
         dom.setAttribute(name, props[name]);
       });
+  }
+
+  // Set the text element's node value type
+  if (dom.nodeType == TEXT_NODE_TYPE) {
+    dom['nodeValue'] = props['nodeValue']
   }
 
   // Render children

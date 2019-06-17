@@ -4,6 +4,13 @@
  * @author Evan Cooper
  */
 import { render } from "../render";
+import jsdom from 'jsdom';
+const { JSDOM } = jsdom;
+
+const dom = new JSDOM('<!DOCTYPE html><head/><body></body>')
+global.window = dom.window
+global.document = window.document
+global.navigator = window.navigator
 
 const ELEMENT = {
   type: "div",
@@ -31,18 +38,11 @@ const ELEMENT_WITH_PROPS = {
       {
         type: "a",
         props: {
-          href: "/bar"
-        }
-      },
-      {
-        type: "span",
-        props: {
-          children: [
-            {
-              type: "TEXT ELEMENT",
-              props: { nodeValue: "Foo" }
-            }
-          ]
+          href: "/bar",
+          children: [{
+            type: "TEXT ELEMENT",
+            props: { nodeValue: "Foo" }
+          }]
         }
       }
     ]
@@ -76,12 +76,12 @@ describe("Render function", () => {
       "<div><input></div>"
     );
   });
-  it("appends an element and adds props and listeners", () => {
+  it("appends an element and adds props, listeners, and text nodes", () => {
     render(ELEMENT_WITH_PROPS, parentNode);
     document.querySelector(".input").click()
     expect(anonJestFn).toHaveBeenCalled()
     expect(document.querySelector("div").innerHTML).toBe(
-      "<div><input></div><div id=\"container\"><input value=\"foo\" type=\"text\" class=\"input\"><a href=\"/bar\"></a><span></span></div>"
+      "<div><input></div><div id=\"container\"><input value=\"foo\" type=\"text\" class=\"input\"><a href=\"/bar\">Foo</a></div>"
     );
   });
 });
