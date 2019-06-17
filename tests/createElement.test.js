@@ -51,5 +51,11 @@ test("it creates an element with a text node", () => {
         }
       ]
     })
-  ).toEqual({"props": {"children": [{"props": {"nodeValue": "Foo"}, "type": "TEXT ELEMENT"}], "class": "amazinglyStyledParagraph"}, "type": "p"});
+  ).toEqual({
+    props: {
+      children: [{ props: { nodeValue: "Foo" }, type: "TEXT ELEMENT" }],
+      class: "amazinglyStyledParagraph"
+    },
+    type: "p"
+  });
 });
