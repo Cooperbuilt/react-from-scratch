@@ -11,6 +11,8 @@
 * @return {object}
 */
 
+const TEXT_ELEMENT = "TEXT ELEMENT";
+
 export const createElement = (type, config, ...rest) => {
   const props = Object.assign({}, config);
   if (rest.length) {
