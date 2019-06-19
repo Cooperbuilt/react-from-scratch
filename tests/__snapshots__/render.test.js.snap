@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`instantiate function Creates an instance of an element that contains dom, element, and childInstances if provided 1`] = `
+Object {
+  "childInstances": Array [
+    Object {
+      "childInstances": Array [],
+      "dom": <input />,
+      "element": Object {
+        "props": Object {},
+        "type": "input",
+      },
+    },
+  ],
+  "dom": <div>
+    <input />
+  </div>,
+  "element": Object {
+    "props": Object {
+      "children": Array [
+        Object {
+          "props": Object {},
+          "type": "input",
+        },
+      ],
+    },
+    "type": "div",
+  },
+}
+`;
